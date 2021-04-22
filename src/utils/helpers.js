@@ -1,0 +1,497 @@
+export function generateGameCode() {
+  const lets = Array.from('abcdefghijklmnopqrstuvwxyz');
+  const randomLet = lets[Math.floor(Math.random() * lets.length)];
+  const gc = `${randomLet}-${Math.floor(Math.random() * 1000)}`;
+  return gc;
+}
+
+export function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+export function randomTilt(max) {
+  let deg = Math.ceil(Math.random() * max);
+  const neg = Math.round(Math.random());
+  if (neg === 0) {
+    deg *= -1;
+  }
+  return `${deg}deg`;
+}
+
+export function objIsEmpty(obj, msg) {
+  if (obj) {
+    if (msg) {
+      console.log(msg, obj, Object.keys(obj).length === 0);
+    }
+    return Object.keys(obj).length === 0;
+  }
+  return true;
+}
+
+export function objectDeepEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    const val1 = object1[key];
+    const val2 = object2[key];
+    const areObjects = isObject(val1) && isObject(val2);
+    if (areObjects && !objectDeepEqual(val1, val2)) {
+      return false;
+    } else if (!areObjects && val1 !== val2) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function isObject(object) {
+  return object != null && typeof object === 'object';
+}
+
+export function rando(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+export function arrayObjectSort(array, field) {
+  function compare( a, b ) {
+    if ( a[field] < b[field] ){
+      return -1;
+    }
+    if ( a[field] > b[field] ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  return array.sort( compare );
+}
+
+export function arraysEqual(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
+const wordlist = [
+  "Hollywood",
+  "Well",
+  "Foot",
+  "New York",
+  "Spring",
+  "Court",
+  "Tube",
+  "Point",
+  "Tablet",
+  "Slip",
+  "Date",
+  "Drill",
+  "Lemon",
+  "Bell",
+  "Screen",
+  "Fair",
+  "Torch",
+  "State",
+  "Match",
+  "Iron",
+  "Block",
+  "France",
+  "Australia",
+  "Limousine",
+  "Stream",
+  "Glove",
+  "Nurse",
+  "Leprechaun",
+  "Play",
+  "Tooth",
+  "Arm",
+  "Bermuda",
+  "Diamond",
+  "Whale",
+  "Comic",
+  "Mammoth",
+  "Green",
+  "Pass",
+  "Missile",
+  "Paste",
+  "Drop",
+  "Phoenix",
+  "Marble",
+  "Staff",
+  "Figure",
+  "Park",
+  "Centaur",
+  "Shadow",
+  "Fish",
+  "Cotton",
+  "Egypt",
+  "Theater",
+  "Scale",
+  "Fall",
+  "Track",
+  "Force",
+  "Dinosaur",
+  "Bill",
+  "Mine",
+  "Turkey",
+  "March",
+  "Contract",
+  "Bridge",
+  "Robin",
+  "Line",
+  "Plate",
+  "Band",
+  "Fire",
+  "Bank",
+  "Boom",
+  "Cat",
+  "Shot",
+  "Suit",
+  "Chocolate",
+  "Roulette",
+  "Mercury",
+  "Moon",
+  "Net",
+  "Lawyer",
+  "Satellite",
+  "Angel",
+  "Spider",
+  "Germany",
+  "Fork",
+  "Pitch",
+  "King",
+  "Crane",
+  "Trip",
+  "Dog",
+  "Conductor",
+  "Part",
+  "Bugle",
+  "Witch",
+  "Ketchup",
+  "Press",
+  "Spine",
+  "Worm",
+  "Alps",
+  "Bond",
+  "Pan",
+  "Beijing",
+  "Racket",
+  "Cross",
+  "Seal",
+  "Aztec",
+  "Maple",
+  "Parachute",
+  "Hotel",
+  "Berry",
+  "Soldier",
+  "Ray",
+  "Post",
+  "Greece",
+  "Square",
+  "Mass",
+  "Bat",
+  "Wave",
+  "Car",
+  "Smuggler",
+  "England",
+  "Crash",
+  "Tail",
+  "Card",
+  "Horn",
+  "Capital",
+  "Fence",
+  "Deck",
+  "Buffalo",
+  "Microscope",
+  "Jet",
+  "Duck",
+  "Ring",
+  "Train",
+  "Field",
+  "Gold",
+  "Tick",
+  "Check",
+  "Queen",
+  "Strike",
+  "Kangaroo",
+  "Spike",
+  "Scientist",
+  "Engine",
+  "Shakespeare",
+  "Wind",
+  "Kid",
+  "Embassy",
+  "Robot",
+  "Note",
+  "Ground",
+  "Draft",
+  "Ham",
+  "War",
+  "Mouse",
+  "Center",
+  "Chick",
+  "China",
+  "Bolt",
+  "Spot",
+  "Piano",
+  "Pupil",
+  "Plot",
+  "Lion",
+  "Police",
+  "Head",
+  "Litter",
+  "Concert",
+  "Mug",
+  "Vacuum",
+  "Atlantis",
+  "Straw",
+  "Switch",
+  "Skyscraper",
+  "Laser",
+  "Scuba Diver",
+  "Africa",
+  "Plastic",
+  "Dwarf",
+  "Lap",
+  "Life",
+  "Honey",
+  "Horseshoe",
+  "Unicorn",
+  "Spy",
+  "Pants",
+  "Wall",
+  "Paper",
+  "Sound",
+  "Ice",
+  "Tag",
+  "Web",
+  "Fan",
+  "Orange",
+  "Temple",
+  "Canada",
+  "Scorpion",
+  "Undertaker",
+  "Mail",
+  "Europe",
+  "Soul",
+  "Apple",
+  "Pole",
+  "Tap",
+  "Mouth",
+  "Ambulance",
+  "Dress",
+  "Ice Cream",
+  "Rabbit",
+  "Buck",
+  "Agent",
+  "Sock",
+  "Nut",
+  "Boot",
+  "Ghost",
+  "Oil",
+  "Superhero",
+  "Code",
+  "Kiwi",
+  "Hospital",
+  "Saturn",
+  "Film",
+  "Button",
+  "Snowman",
+  "Helicopter",
+  "Loch Ness",
+  "Log",
+  "Princess",
+  "Time",
+  "Cook",
+  "Revolution",
+  "Shoe",
+  "Mole",
+  "Spell",
+  "Grass",
+  "Washer",
+  "Game",
+  "Beat",
+  "Hole",
+  "Horse",
+  "Pirate",
+  "Link",
+  "Dance",
+  "Fly",
+  "Pit",
+  "Server",
+  "School",
+  "Lock",
+  "Brush",
+  "Pool",
+  "Star",
+  "Jam",
+  "Organ",
+  "Berlin",
+  "Face",
+  "Luck",
+  "Amazon",
+  "Cast",
+  "Gas",
+  "Club",
+  "Sink",
+  "Water",
+  "Chair",
+  "Shark",
+  "Jupiter",
+  "Copper",
+  "Jack",
+  "Platypus",
+  "Stick",
+  "Olive",
+  "Grace",
+  "Bear",
+  "Glass",
+  "Row",
+  "Pistol",
+  "London",
+  "Rock",
+  "Van",
+  "Vet",
+  "Beach",
+  "Charge",
+  "Port",
+  "Disease",
+  "Palm",
+  "Moscow",
+  "Pin",
+  "Washington",
+  "Pyramid",
+  "Opera",
+  "Casino",
+  "Pilot",
+  "String",
+  "Night",
+  "Chest",
+  "Yard",
+  "Teacher",
+  "Pumpkin",
+  "Thief",
+  "Bark",
+  "Bug",
+  "Mint",
+  "Cycle",
+  "Telescope",
+  "Calf",
+  "Air",
+  "Box",
+  "Mount",
+  "Thumb",
+  "Antarctica",
+  "Trunk",
+  "Snow",
+  "Penguin",
+  "Root",
+  "Bar",
+  "File",
+  "Hawk",
+  "Battery",
+  "Compound",
+  "Slug",
+  "Octopus",
+  "Whip",
+  "America",
+  "Ivory",
+  "Pound",
+  "Sub",
+  "Cliff",
+  "Lab",
+  "Eagle",
+  "Genius",
+  "Ship",
+  "Dice",
+  "Hood",
+  "Heart",
+  "Novel",
+  "Pipe",
+  "Himalayas",
+  "Crown",
+  "Round",
+  "India",
+  "Needle",
+  "Shop",
+  "Watch",
+  "Lead",
+  "Tie",
+  "Table",
+  "Cell",
+  "Cover",
+  "Czech",
+  "Back",
+  "Bomb",
+  "Ruler",
+  "Forest",
+  "Bottle",
+  "Space",
+  "Hook",
+  "Doctor",
+  "Ball",
+  "Bow",
+  "Degree",
+  "Rome",
+  "Plane",
+  "Giant",
+  "Nail",
+  "Dragon",
+  "Stadium",
+  "Flute",
+  "Carrot",
+  "Wake",
+  "Fighter",
+  "Model",
+  "Tokyo",
+  "Eye",
+  "Mexico",
+  "Hand",
+  "Swing",
+  "Key",
+  "Alien",
+  "Tower",
+  "Poison",
+  "Cricket",
+  "Cold",
+  "Knife",
+  "Church",
+  "Board",
+  "Cloak",
+  "Ninja",
+  "Olympus",
+  "Belt",
+  "Light",
+  "Death",
+  "Stock",
+  "Millionaire",
+  "Day",
+  "Knight",
+  "Pie",
+  "Bed",
+  "Circle",
+  "Rose",
+  "Change",
+  "Cap",
+  "Triangle"
+]
+export function wordGameCode() {
+  return slugify(`${rando(wordlist)}-${rando(wordlist)}`);
+}

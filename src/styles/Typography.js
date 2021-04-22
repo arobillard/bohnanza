@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
 function typeScale(scale, step, units = 'rem', dir = 'up') {
   let val = 1;
@@ -13,12 +13,13 @@ function typeScale(scale, step, units = 'rem', dir = 'up') {
   return `${val}${units}`;
 }
 
-const scales = [
+export const bpScales = [
   { size: 0, scale: 1.2 },
-  { size: 38, scale: 1.333 },
+  { size: 38, scale: 1.25 },
+  { size: 60, scale: 1.333 },
 ];
 
-function breakpointGenerateScales(typeScales, step) {
+export function breakpointGenerateScales(typeScales, step) {
   const breakpoints = [];
   typeScales.forEach((bp) => {
     if (bp.size === 0) {
@@ -35,29 +36,38 @@ function breakpointGenerateScales(typeScales, step) {
   return condensedBPs;
 }
 
-const fontSecondary = `font-family: "Playfair", serif;`;
-
-const h1Styles = `
-  ${fontSecondary}
-  ${breakpointGenerateScales(scales, 5)}
+const h1Styles = css`
+  font-family: ${({ theme }) => theme.fonts.secondary};
+  ${breakpointGenerateScales(bpScales, 5)}
   font-weight: 900;
-  text-shadow: 2px 2px 0 #0004;
+  text-shadow: ${({ theme }) => theme.shadow};
 `;
 
-const h2Styles = `
-  ${breakpointGenerateScales(scales, 4)}
+const h2Styles = css`
+  font-family: ${({ theme }) => theme.fonts.secondary};
+  text-shadow: ${({ theme }) => theme.shadow};
+  ${breakpointGenerateScales(bpScales, 4)}
 `;
 
-const h3Styles = `
-  ${breakpointGenerateScales(scales, 3)}
+const h3Styles = css`
+  ${breakpointGenerateScales(bpScales, 3)}
 `;
 
-const h4Styles = `
-  ${breakpointGenerateScales(scales, 2)}
+const h4Styles = css`
+  ${breakpointGenerateScales(bpScales, 2)}
 `;
 
-const h5Styles = `
-  ${breakpointGenerateScales(scales, 1)}
+const h5Styles = css`
+  ${breakpointGenerateScales(bpScales, 1)}
+`;
+
+export const UserTitle = styled.h2`
+  ${({ theme }) => theme.fontSizes.scale5}
+  margin-bottom: ${({ theme }) => theme.spacers.quarter}rem;
+  color: ${({ theme }) => theme.colors.primary};
+  ${({ textAlign }) => textAlign && css`
+    text-align: ${textAlign};
+  `}
 `;
 
 const Typography = createGlobalStyle`
@@ -65,7 +75,7 @@ const Typography = createGlobalStyle`
   html {
     font-size: 1rem;
     line-height: 1.5;
-    font-family: "Lato", sans-serif;
+    font-family: ${({ theme }) => theme.fonts.primary};
   }
 
   h1,

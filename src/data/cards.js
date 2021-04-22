@@ -1,6 +1,7 @@
 export const cardList = [
   {
     name: 'Cocoa Bean',
+    num: 0,
     count: 4,
     score: {
       2: 1,
@@ -10,6 +11,7 @@ export const cardList = [
   },
   {
     name: 'Garden Bean',
+    num: 1,
     count: 6,
     score: {
       2: 2,
@@ -18,6 +20,7 @@ export const cardList = [
   },
   {
     name: 'Red Bean',
+    num: 2,
     count: 8,
     score: {
       2: 1,
@@ -28,6 +31,7 @@ export const cardList = [
   },
   {
     name: 'Black-Eyed Bean',
+    num: 3,
     count: 10,
     score: {
       2: 1,
@@ -38,6 +42,7 @@ export const cardList = [
   },
   {
     name: 'Soy Bean',
+    num: 4,
     count: 12,
     score: {
       2: 1,
@@ -48,6 +53,7 @@ export const cardList = [
   },
   {
     name: 'Green Bean',
+    num: 5,
     count: 14,
     score: {
       3: 1,
@@ -58,6 +64,7 @@ export const cardList = [
   },
   {
     name: 'Stink Bean',
+    num: 6,
     count: 16,
     score: {
       3: 1,
@@ -68,6 +75,7 @@ export const cardList = [
   },
   {
     name: 'Chili Bean',
+    num: 7,
     count: 18,
     score: {
       3: 1,
@@ -78,6 +86,7 @@ export const cardList = [
   },
   {
     name: 'Blue Bean',
+    num: 8,
     count: 20,
     score: {
       4: 1,
@@ -88,6 +97,7 @@ export const cardList = [
   },
   {
     name: 'Wax Bean',
+    num: 9,
     count: 22,
     score: {
       4: 1,
@@ -98,6 +108,7 @@ export const cardList = [
   },
   {
     name: 'Coffee Bean',
+    num: 10,
     count: 24,
     score: {
       4: 1,
