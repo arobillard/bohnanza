@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { UserTitle } from "../../styles/Typography";
-import Card from "../Card";
+import Card from "../cards/Card";
 import EmptyField from "./EmptyField";
 
 const UserFieldStyles = styled.div`
@@ -16,7 +16,8 @@ export default function UserField({
   fieldNum,
   userData,
   inUserBoard,
-  handleHarvest
+  handleHarvest,
+  cardLocation
 }) {
 
   return (
@@ -30,12 +31,14 @@ export default function UserField({
           }
           <Card
             cardNum={cardNum}
-            inField={true}
+            location={cardLocation}
             fieldNum={fieldNum}
             actionable={inUserBoard}
             handleHarvest={handleHarvest}
             numCards={numCards}
             inUserBoard={inUserBoard}
+            index={`${userData.userId}-field-${fieldNum}`}
+            userData={userData}
           />
         </PlantedField>
       ) : (

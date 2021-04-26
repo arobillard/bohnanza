@@ -2,36 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 const Boilerplate = createGlobalStyle`
 
-  @-moz-viewport {
-    width: device-width;
-    scale: 1;
-  }
-  @-ms-viewport {
-    width: device-width;
-    scale: 1;
-  }
-  @-o-viewport {
-    width: device-width;
-    scale: 1;
-  }
-  @-webkit-viewport {
-    width: device-width;
-    scale: 1;
-  }
-  @viewport {
-    width: device-width;
-    scale: 1;
-  }
-
-  html {
-    box-sizing: border-box;
-    -moz-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
-
   *,
   *::before,
   *::after {
@@ -113,6 +83,10 @@ const Boilerplate = createGlobalStyle`
   svg.img-flex {
     width: 100%;
     height: 100%;
+  }
+
+  .push-l-auto {
+    margin-left: auto;
   }
 
 `;

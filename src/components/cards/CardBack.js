@@ -26,6 +26,9 @@ const CardBackStyles = styled.div`
       border: 2px solid ${({ theme }) => theme.colors.primary};
       ${({ theme }) => theme.radius};
       text-align: center;
+      background-image: url('/images/cards/card-back-v.jpg');
+      background-size: contain;
+      background-position: center;
       ${({ theme, rotate }) => (rotate ?
         css`
           width: ${theme.cardRatio.h};

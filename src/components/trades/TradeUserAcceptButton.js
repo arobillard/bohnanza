@@ -34,7 +34,6 @@ export default function TradeUserAcceptButton({
   }
 
   function handleStatus() {
-    console.log(userTrade);
     if (myAccept) {
 
       const canAccept = checkTrade(singleUser.bohnanza.hand, tradeData);

@@ -7,11 +7,20 @@ const MessageBoardStyles = styled.div`
   background-color: ${({ theme }) => theme.colors.secondaryPale};
   ${({ theme }) => theme.radius}
   /* padding: ${({ theme }) => theme.spacers.twoThirds}rem; */
+  /* max-height: 30rem; */
+  height: 25rem;
   z-index: 200;
   overflow: hidden;
   display: grid;
   grid-template-rows: 1fr auto;
   /* gap: ${({ theme }) => theme.spacers.twoThirds}rem; */
+  @media ${({ theme }) => theme.mq.ml} {
+    height: auto;
+    max-height: 30rem;
+  }
+  @media ${({ theme }) => theme.mq.l} {
+    max-height: 35rem;
+  }
   .type-bar {
     padding: ${({ theme }) => theme.spacers.half}rem;
     background-color: #eee;

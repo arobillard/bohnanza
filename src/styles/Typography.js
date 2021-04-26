@@ -76,6 +76,9 @@ const Typography = createGlobalStyle`
     font-size: 1rem;
     line-height: 1.5;
     font-family: ${({ theme }) => theme.fonts.primary};
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   h1,

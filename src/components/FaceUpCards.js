@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Card from './Card';
+import Card from './cards/Card';
 
 const FaceUpCardsStyle = styled.div`
   grid-area: faceUp;
@@ -9,22 +9,10 @@ const FaceUpCardsStyle = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacers.third}rem;
   grid-template-columns: 1fr 1fr;
-  @media ${({ theme }) => theme.mq.ml} {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  @media ${({ theme }) => theme.mq.l} {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-  @media ${({ theme }) => theme.mq.xl} {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
   > div {
     display: flex;
     align-items: center;
-    &:first-child {
+    &:nth-child(2) {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
     }
@@ -54,6 +42,59 @@ const FaceUpCardsStyle = styled.div`
     opacity: .15;
     text-align: center;
   }
+  @media ${({ theme }) => theme.mq.m} {
+    grid-template-columns: 1fr 1fr 1fr;
+    .section-title {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    > div {
+      &:nth-child(2) {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+      &:last-child {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+      }
+    }
+  }
+  @media ${({ theme }) => theme.mq.ml} {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    .section-title {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+    }
+    > div {
+      &:nth-child(2) {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+      &:last-child {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+    }
+  }
+  @media ${({ theme }) => theme.mq.l} {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    > div {
+      &:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+      }
+      &:last-child {
+        grid-column: 1 / -2;
+        grid-row: 2 / 3;
+      }
+    }
+  }
+  @media ${({ theme }) => theme.mq.xl} {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 `;
 
 export default function FaceUpCards({
@@ -72,6 +113,7 @@ export default function FaceUpCards({
           <div key={`faceUp-${i}`}>
             <Card
               cardNum={card}
+              location='faceUp'
               actionable={myTurn && gameData.turnPhase.phase === 3}
               plantType='faceUp'
               rotate='true'

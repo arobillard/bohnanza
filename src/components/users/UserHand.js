@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { UserTitle } from "../../styles/Typography";
 import { progressPhase } from "../../utils/database";
 import { plantCard } from "../../utils/users";
-import Card from "../Card";
+import Card from "../cards/Card";
 
 const UserHandStyles = styled.div`
   grid-area: userHand;
@@ -58,9 +58,11 @@ export default function UserHand({
             return (
               <Card
                 key={`user-hand-${i}`}
+                index={`user-hand-${i}`}
                 cardNum={card}
+                location='hand'
                 width={{
-                  xs: '6rem',
+                  xs: '7rem',
                   s: '8rem',
                   m: '10rem',
                 }}
@@ -69,6 +71,8 @@ export default function UserHand({
                 setErrors={setErrors}
                 plantFromHand={plantFromHand}
                 plantType="hand"
+                userData={userData}
+                inUserBoard
               />
             );
           })}

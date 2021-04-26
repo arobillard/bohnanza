@@ -5,6 +5,8 @@ import { deal, resetUserGameInfo } from './users';
 
 const db = firebase.firestore();
 
+const miniDeck = [8, 4, 5, 4, 2, 3, 0, 2, 3, 3, 3, 2, 2, 8, 9, 10, 10, 0, 2, 4, 8, 7, 9, 7, 1];
+
 const turnPhaseDefault = {
   phase: 1,
   phase1 : { // Hand Plant
@@ -24,7 +26,7 @@ const turnPhaseDefault = {
   },
   phase4: { // Draw
     title: 'Draw',
-    desc: 'Draw three cards, placing in hand in order.',
+    desc: 'Draw two cards, placing in hand in order.',
     drawn: 0,
   }
 }
@@ -69,6 +71,23 @@ export function startGame(gameCode, users) {
   users.forEach((user, i) => {
     resetUserGameInfo(user, hands[i]);
   })
+}
+
+export async function reshuffleDeck(gameCode, deck, discardPile) {
+  const updatedDeck = shuffle([
+    ...deck,
+    ...discardPile
+  ]);
+  try {
+    await Promise.all([
+      db.collection('bohnanza').doc(gameCode).update({
+        deck: updatedDeck,
+        discardPile: [],
+      }),
+    ]);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function cancelGame(gameCode) {
@@ -148,7 +167,7 @@ export async function progressPhase(gameCode, gameData, action) {
 
 }
 
-export async function nextPhase(gameData, gameCode, setErrors, errors, allPlanted, admin) {
+export async function nextPhase(gameData, gameCode, setErrors, errors, allPlanted, admin, userHand) {
   
   const { turnPhase } = gameData;
   let updatedTurnPhase = {...turnPhase};
@@ -166,6 +185,10 @@ export async function nextPhase(gameData, gameCode, setErrors, errors, allPlante
       doUpdate = true;
     }
   } else if (turnPhase.phase === 1 && turnPhase.phase1.planted > 0) {
+    updatedTurnPhase = {...turnPhaseDefault};
+    updatedTurnPhase.phase = turnPhase.phase + 1;
+    doUpdate = true;
+  } else if (turnPhase.phase === 1 && userHand.length === 0) {
     updatedTurnPhase = {...turnPhaseDefault};
     updatedTurnPhase.phase = turnPhase.phase + 1;
     doUpdate = true;

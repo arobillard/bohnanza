@@ -4,7 +4,6 @@ import UserFields from "./UserFields";
 import UserHand from "./UserHand";
 import UserPhaseControls from "./UserPhaseControls";
 import UserPot from "./UserPot";
-import UserScore from "./UserScore";
 
 const UserBoardStyle = styled.div`
   grid-area: user;
@@ -37,56 +36,6 @@ const UserBoardStyle = styled.div`
       'userHand userHand userHand'
       'userPot userPot userPhase';
   }
-  /* @media ${({ theme }) => theme.mq.m} {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-      'userFields userFields userScore'
-      'userHand userHand userHand'
-      'userPot userPot userPhase';
-  }
-  @media ${({ theme }) => theme.mq.ml} {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-      'userFields userFields userScore'
-      'userHand userHand userHand'
-      'userPot userPot userPhase'; */
-  }
-  /* @media ${({ theme }) => theme.mq.l} {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-      'userFields userFields userScore'
-      'userHand userHand userHand userHand'
-      'userPot userPot userPhase';
-  }
-  @media ${({ theme }) => theme.mq.xl} {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-      'userFields userFields userFields'
-      'userHand userHand userScore'
-      'userPot userPot userPhase';
-  } */
-  /* @media ${({ theme }) => theme.mq.l} {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-areas:
-      'userFields userFields userFields userFields userScore userScore'
-      'userHand userHand userHand userHand userHand userHand'
-      'userPot userPot userPot userPhase userPhase userPhase';
-  }
-  @media ${({ theme }) => theme.mq.xl} {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-areas:
-      'userFields userFields userFields userFields userFields userFields'
-      'userHand userHand userHand userHand userScore userScore'
-      'userPot userPot userPot userPot userPot userPot'
-      'userPhase userPhase userPhase userPhase userPhase userPhase';
-  }
-  @media ${({ theme }) => theme.mq.xxl} {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-areas:
-      'userFields userFields userFields userFields userFields userFields'
-      'userHand userHand userHand userHand userScore userScore'
-      'userPot userPot userPot userPhase userPhase userPhase';
-  } */
 `;
 
 export default function UserBoard({

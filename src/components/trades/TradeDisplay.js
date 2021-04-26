@@ -3,20 +3,35 @@ import styled, { css } from 'styled-components';
 import { cardList } from '../../data/cards';
 import { arrayObjectSort } from '../../utils/helpers'
 import { applyUserColor } from '../../styles/Theme';
-import { CardMini } from '../Card';
+import CardMini from '../cards/CardMini';
 import TradeUserAcceptButton from './TradeUserAcceptButton';
 import Button from '../Button';
 import { acceptTrade, checkTrade, fulfillTrade, rejectTrade } from '../../utils/trades';
 
 const TradeDisplayStyles = styled.div`
-  grid-column: span 4;
+  grid-column: span 12;
   padding: ${({ theme }) => theme.spacers.half}rem;
   ${({ theme }) => theme.radius}
   ${({ color }) => applyUserColor(color)}
   ${({ rejected }) => rejected && css`
+    opacity: .25;
+  `}
+  ${({ accepted }) => accepted && css`
     opacity: .5;
   `}
   color: #fff;
+  @media ${({ theme }) => theme.mq.m} {
+    grid-column: span 9;
+    ${({ myTrade }) => myTrade && css`
+      grid-column: 4 / span 9;
+    `}
+  }
+  @media ${({ theme }) => theme.mq.l} {
+    grid-column: span 8;
+    ${({ myTrade }) => myTrade && css`
+      grid-column: 5 / span 8;
+    `}
+  }
   h3 {
     font-size: 1rem;
     font-weight: normal;
@@ -86,6 +101,9 @@ const TradeDisplayStyles = styled.div`
         font-weight: bold;
         display: block;
       }
+    }
+    .push-l-auto {
+      margin-left: auto;
     }
   }
 `;
@@ -188,6 +206,9 @@ export default function TradeDisplay({
   const [get, setGet] = useState(null);
 
   const myTurn = gameData.turn === userData.userId;
+  const myTrade = from?.userId === userData?.userId;
+
+  const [fulfilling, setFulfilling] = useState(false);
 
   useEffect(() => {
     const updatedGive = {};
@@ -216,11 +237,16 @@ export default function TradeDisplay({
     })
     setGet(updatedGet);
 
-    if (tradeData?.toAccept && tradeData?.fromAccept && !tradeData?.fulfilled && from?.userId === userData?.userId) {
+    if (tradeData?.toAccept && tradeData?.fromAccept && !tradeData?.fulfilled && from?.userId === userData?.userId && !fulfilling) {
+      setFulfilling(true);
       fulfillTrade(gameData, gameCode, tradeData, users);
     }
 
-  }, [tradeData, userData?.userId, from?.userId, users, gameData, gameCode])
+  }, [tradeData, userData?.userId, from?.userId, users, gameData, gameCode, fulfilling])
+
+  function handleCancel() {
+    rejectTrade(tradeData, userData.name);
+  }
 
   function giveTitle() {
     if (tradeData?.confirmedTo) {
@@ -280,6 +306,20 @@ export default function TradeDisplay({
             />
           )
         })}
+        {
+          myTurn
+          &&
+          <div className="push-l-auto">
+            <Button
+              type="button"
+              onClick={handleCancel}
+              textColor='white'
+              cancel
+            >
+              Cancel
+            </Button>
+          </div>
+        }
       </>
       )
     }
@@ -289,6 +329,8 @@ export default function TradeDisplay({
     <TradeDisplayStyles
       color={from?.bohnanza.color}
       rejected={tradeData?.rejected}
+      accepted={tradeData?.fromAccept && tradeData?.toAccept}
+      myTrade={myTrade}
     >
       <h3>Trade</h3>
       <div className="trade-grid">

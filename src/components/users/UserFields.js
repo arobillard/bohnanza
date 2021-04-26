@@ -12,7 +12,7 @@ const UserFieldsStyles = styled.div`
     inUserBoard &&
     css`
       grid-template-columns: repeat(2, 1fr);
-      @media ${({ theme }) => theme.mq.sm} {
+      @media ${({ theme }) => theme.mq.m} {
         grid-template-columns: repeat(4, 1fr);
       }
     `}
@@ -30,6 +30,7 @@ export default function UserFields({
           key={`${userData.userId}-field-${i + 1}`}
           field={userData.bohnanza.fields[field]}
           fieldNum={i + 1}
+          cardLocation={inUserBoard ? 'userField' : 'playerField'}
           userData={userData}
           inUserBoard={inUserBoard}
           handleHarvest={handleHarvest}
@@ -40,6 +41,7 @@ export default function UserFields({
         ?
         <UserScore
           score={userData.bohnanza.score}
+          userColor={userData.bohnanza.color}
         />
         :
         null

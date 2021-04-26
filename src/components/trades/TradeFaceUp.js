@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Card, { CardActivator } from "../Card";
+import Card, { CardActivator } from "../cards/Card";
 
 const TradeFaceUpStyles = styled.div`
   grid-area: faceUp;
@@ -82,6 +82,7 @@ export default function TradeFaceUp({
           <CardActivator key={`trade-faceUp-${i}`} disabled={card.addedToTrade}>
             <Card
               cardNum={card.cardNum}
+              location="tradeBoard"
               gameData={gameData}
               tradeCard={true}
               onClick={() => card.addedToTrade === false && addToOffer(card, i)}

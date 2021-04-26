@@ -191,6 +191,8 @@ export function deal(deck, users) {
     cardNum++;
   }
 
+  console.log(updatedDeck);
+
   return { hands, deck: updatedDeck };
 }
 

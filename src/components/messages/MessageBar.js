@@ -15,6 +15,9 @@ const MessageTypeBarStyles = styled.form`
     background: transparent;
     border: 0;
     color: ${({ theme }) => theme.colors.primary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .trade-btn {
     left: 0.5rem;
@@ -56,9 +59,11 @@ export default function MessageBar({
         name="message-bar"
         placeholder="Make a trade or type a message..."
         padding=".75rem 3rem"
+        labelText="Message Bar"
+        labelHide
       />
       <button className="trade-btn" type="button" onClick={() => gameData.turnPhase.phase === 2 && setTradeBoardVisible(true)}>
-        <span className="material-icons">autorenew</span>
+        <span className="material-icons">compare_arrows</span>
       </button>
       <button className="send-btn" type="submit">
         <span className="material-icons">send</span>

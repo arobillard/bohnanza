@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Card from "../Card";
+import Card from "../cards/Card";
 
 const TradeOfferStyles = styled.div`
   grid-area: youOffer;
@@ -57,6 +57,7 @@ export default function TradeOffer({
           return (
             <Card
               cardNum={card.cardNum}
+              location="tradeBoard"
               gameData={gameData}
               tradeCard={true}
               onClick={() => removeFromOffer(card, i)}

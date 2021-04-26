@@ -15,7 +15,7 @@ const TradeBoardStyles = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(75em, 100%);
+  width: min(75em, calc(100% - 3rem));
   z-index: 1000;
   background-color: ${({ theme }) => theme.colors.secondaryPale};
   padding: ${({ theme }) => theme.spacers.twoThirds}rem;

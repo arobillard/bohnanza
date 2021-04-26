@@ -16,22 +16,29 @@ const BoardGrid = styled.div`
       'message message faceUp'
       'players players players';
   }
-  @media ${({ theme }) => theme.mq.l} {
+  /* @media ${({ theme }) => theme.mq.l} {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
       'user user faceUp'
       'user user message'
       'players players players';
-  }
+  } */
   @media ${({ theme }) => theme.mq.xl} {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    /* grid-template-areas:
+      'user user user faceUp message message'
+      'user user user faceUp message message'
+      'user user user players players players'
+      'user user user players players players'
+      'user user user players players players'; */
     grid-template-areas:
-      'user user user faceUp message message'
-      'user user user faceUp message message'
-      'user user user players players players'
-      'user user user players players players'
-      'user user user players players players';
+      'user user user message message message'
+      'user user user message message message'
+      'user user user message message message'
+      'user user user faceUp players players'
+      'user user user faceUp players players';
     height: clamp(50em, calc(100vh - 4.5rem), 65em);
   }
   gap: ${({ theme }) => theme.spacers.twoThirds}rem;

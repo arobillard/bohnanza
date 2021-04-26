@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Deck from "./components/Deck";
+import Deck from "./components/cards/Deck";
 import FaceUpCards from "./components/FaceUpCards";
 import GameBoardGrid from "./components/GameBoardGrid";
 import HostOptions from "./components/HostOptions";

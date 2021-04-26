@@ -1,7 +1,9 @@
 export const cardList = [
   {
-    name: 'Cocoa Bean',
+    name: 'Cocoa',
     num: 0,
+    img: '0-cocoa.jpg',
+    textColor: 'yellow',
     count: 4,
     score: {
       2: 1,
@@ -10,8 +12,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Garden Bean',
+    name: 'Garden',
     num: 1,
+    img: '1-garden.jpg',
+    textColor: 'green',
     count: 6,
     score: {
       2: 2,
@@ -19,8 +23,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Red Bean',
+    name: 'Red',
     num: 2,
+    img: '2-red-bean.jpg',
+    textColor: 'red',
     count: 8,
     score: {
       2: 1,
@@ -30,8 +36,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Black-Eyed Bean',
+    name: 'Black-Eyed',
     num: 3,
+    img: '3-black-eyed.jpg',
+    textColor: 'blue',
     count: 10,
     score: {
       2: 1,
@@ -41,8 +49,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Soy Bean',
+    name: 'Soy',
     num: 4,
+    img: '4-soy.jpg',
+    textColor: 'blue',
     count: 12,
     score: {
       2: 1,
@@ -52,8 +62,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Green Bean',
+    name: 'Green',
     num: 5,
+    img: '5-green.jpg',
+    textColor: 'purple',
     count: 14,
     score: {
       3: 1,
@@ -63,8 +75,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Stink Bean',
+    name: 'Stink',
     num: 6,
+    img: '6-stink.jpg',
+    textColor: 'green',
     count: 16,
     score: {
       3: 1,
@@ -74,8 +88,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Chili Bean',
+    name: 'Chili',
     num: 7,
+    img: '7-chili.jpg',
+    textColor: 'yellow',
     count: 18,
     score: {
       3: 1,
@@ -85,8 +101,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Blue Bean',
+    name: 'Blue',
     num: 8,
+    img: '8-blue.jpg',
+    textColor: 'blue',
     count: 20,
     score: {
       4: 1,
@@ -96,8 +114,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Wax Bean',
+    name: 'Wax',
     num: 9,
+    img: '9-wax.jpg',
+    textColor: 'green',
     count: 22,
     score: {
       4: 1,
@@ -107,8 +127,10 @@ export const cardList = [
     },
   },
   {
-    name: 'Coffee Bean',
+    name: 'Coffee',
     num: 10,
+    img: '10-coffee.jpg',
+    textColor: 'yellow',
     count: 24,
     score: {
       4: 1,

@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { applyUserColor } from "../../styles/Theme";
 import { UserTitle } from "../../styles/Typography";
-import CardBack from "../CardBack";
+import CardBack from "../cards/CardBack";
 
 const UserScoreStyles = styled.div`
   /* grid-area: userScore; */
@@ -20,25 +21,33 @@ const UserScoreStyles = styled.div`
   }
   .score-number {
     position: absolute;
-    top: 50%;
+    bottom: ${({ theme }) => theme.spacers.twoThirds}rem;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     font-family: ${({ theme }) => theme.fonts.secondary};
     ${({ theme }) => theme.fontSizes.scale2}
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 4rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid ${({ theme }) => theme.colors.primary};
+    border: 3px solid;
+    ${({userColor}) => applyUserColor(userColor, 'border-color')}
+    transition:
+      background-color ${({ theme }) => theme.transition},
+      bottom ${({ theme }) => theme.transition},
+      transform ${({ theme }) => theme.transition},
+      color ${({ theme }) => theme.transition};
     ${({ noScore }) => {
       if (noScore) {
         return css`
-          color: ${({ theme }) => theme.colors.primary};
+          ${({userColor}) => applyUserColor(userColor, 'color')}
+          bottom: 50%;
+          transform: translate(-50%, 50%);
         `;
       } else {
         return css`
-          background-color: ${({ theme }) => theme.colors.primary};
+          ${({userColor}) => applyUserColor(userColor)}
           color: #fff;
         `;
       }
@@ -50,9 +59,12 @@ const UserScoreStyles = styled.div`
   }
 `;
 
-export default function UserScore({ score }) {
+export default function UserScore({ score, userColor }) {
   return (
-    <UserScoreStyles noScore={score?.length === 0}>
+    <UserScoreStyles
+      noScore={score?.length === 0}
+      userColor={userColor}
+    >
       <UserTitle textAlign="center">Your Score</UserTitle>
       <div className="score-cards-wrap">
         {

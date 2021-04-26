@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { UserTitle } from '../../styles/Typography';
-import Card from '../Card';
+import { plantCard } from '../../utils/users';
+import Card from '../cards/Card';
 
 const UserPotStyles = styled.div`
   grid-area: userPot;
@@ -28,6 +29,12 @@ export default function UserPot({
 
   let zIndex = userData?.bohnanza?.pot.length + 1 || 20;
 
+  function potPlant(card) {
+    if (gameData.turnPhase.phase === 3) {
+      plantCard(card, userData, 'userPot', gameData, gameCode)
+    }
+  }
+
   return (
     <UserPotStyles>
       <UserTitle>Your Pot</UserTitle>
@@ -39,11 +46,13 @@ export default function UserPot({
               <Card
                 key={`${userData.userId}-pot-${i}`}
                 cardNum={card}
+                location='userPot'
                 actionable={gameData.turnPhase.phase === 3}
                 plantType='userPot'
                 userData={userData}
                 gameCode={gameCode}
                 gameData={gameData}
+                onClick={() => potPlant(card)}
                 zIndex={zIndex}
                 width={{
                   xs: '6rem',

@@ -6,19 +6,18 @@ const MessageDisplayStyles = styled.div`
   /* overflow: hidden; */
   overflow-y: scroll;
   /* height: 100%; */
-  max-height: 25rem;
   margin: 0 ${({ theme }) => theme.spacers.twoThirds}rem;
   padding-top: ${({ theme }) => theme.spacers.twoThirds}rem;
   border-radius: 0 0 .75rem .75rem;
   .message-display-inner {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     gap: ${({ theme }) => theme.spacers.half}rem;
   }
 `;
 
 const Message = styled.div`
-  grid-column: span 3;
+  grid-column: span 9;
   padding: ${({ theme }) => theme.spacers.half}rem;
   ${({ theme }) => theme.radius};
   ${({ color }) => applyUserColor(color)}
@@ -29,11 +28,15 @@ const Message = styled.div`
         `;
       }
     }}
-  ${({ myMessage }) =>
-    myMessage &&
-    css`
-      grid-column: 2 / span 3;
+  ${({ myMessage }) => myMessage && css`
+    grid-column: 4 / span 9;
+  `}
+  @media ${({ theme }) => theme.mq.l} {
+    grid-column: span 8;
+    ${({ myMessage }) => myMessage && css`
+      grid-column: 5 / span 8;
     `}
+  }
 `;
 
 export default function MessageDisplay({

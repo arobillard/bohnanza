@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { cardList } from "../../data/cards";
-import Card from "../Card";
+import Card from "../cards/Card";
 
 const TradeAllCardsStyles = styled.div`
   grid-area: allCards;
@@ -22,6 +22,12 @@ const TradeAllCardsStyles = styled.div`
     gap: ${({ theme }) => theme.spacers.third}rem;
     --cols: 3;
     grid-template-columns: repeat(var(--cols), 1fr);
+    @media ${({ theme }) => theme.mq.s} {
+      --cols: 4;
+    }
+    @media ${({ theme }) => theme.mq.m} {
+      --cols: 6;
+    }
     @media ${({ theme }) => theme.mq.l} {
       --cols: 11;
     }
@@ -58,6 +64,7 @@ export default function TradeAllCards({
         {Object.keys(cardList).map((card, i) => (
           <Card
             cardNum={i}
+            location="tradeBoard"
             tradeCard={true}
             onClick={() => addToWant(i)}
             key={`all-cards-list-${i}`}

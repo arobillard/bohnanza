@@ -71,7 +71,7 @@ export default function UserPhaseControls({
 
     }
 
-    nextPhase(gameData, gameCode, setErrors, errors, allPlanted)
+    nextPhase(gameData, gameCode, setErrors, errors, allPlanted, userData.bohnanza.hand)
   }
 
   return (

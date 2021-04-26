@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
-import Card, { CardActivator } from "../Card";
+import Card, { CardActivator } from "../cards/Card";
 
 const TradeHandStyles = styled.div`
   grid-area: hand;
@@ -75,6 +75,7 @@ export default function TradeHand({
           <CardActivator key={`trade-hand-${i}`} disabled={card.addedToTrade}>
             <Card
               cardNum={card.cardNum}
+              location="tradeBoard"
               gameData={gameData}
               tradeCard={true}
               onClick={() => card.addedToTrade === false && addToOffer(card, i)}
