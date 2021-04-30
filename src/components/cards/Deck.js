@@ -150,8 +150,8 @@ export default function Deck({
         ]
         setErrors(updatedErrors);
         await reshuffleDeck(gameCode, gameData.deck, gameData.discardPile);
-        // turnUpCards(gameCode, gameData);
-        // progressPhase(gameCode, gameData, 'turnUp');
+        turnUpCards(gameCode, gameData);
+        progressPhase(gameCode, gameData, 'turnUp');
       }
     }
   }

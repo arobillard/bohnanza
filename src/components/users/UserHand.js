@@ -60,6 +60,7 @@ export default function UserHand({
                 key={`user-hand-${i}`}
                 index={`user-hand-${i}`}
                 cardNum={card}
+                gameData={gameData}
                 location='hand'
                 width={{
                   xs: '7rem',

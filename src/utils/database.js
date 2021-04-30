@@ -167,7 +167,7 @@ export async function progressPhase(gameCode, gameData, action) {
 
 }
 
-export async function nextPhase(gameData, gameCode, setErrors, errors, allPlanted, admin, userHand) {
+export async function nextPhase(gameData, gameCode, setErrors, errors, allPlanted, admin, userHand, customErr) {
   
   const { turnPhase } = gameData;
   let updatedTurnPhase = {...turnPhase};
@@ -208,7 +208,7 @@ export async function nextPhase(gameData, gameCode, setErrors, errors, allPlante
     setErrors([
       ...errors,
       {
-        msg: 'You must complete phase before progressing!',
+        msg: customErr || 'You must complete phase before progressing!',
         type: 'warning'
       }
     ])

@@ -196,6 +196,14 @@ const CardStyles = styled.div`
       `
     }
   }}
+  ${({ location, textColor }) => {
+    if (location === 'discardPile') { 
+      return css`
+        opacity: .5;
+      }
+      `
+    }
+  }}
   ${({ location, cardName }) => {
     if (location === 'userPot' || location === 'tradeBoard') { 
       return css`
@@ -363,9 +371,11 @@ export default function Card({
   const [selected, setSelected] = useState(false);
 
   function handleCardClick() {
-    if (actionable && !selected) {
+    if (actionable && !selected && gameData?.turnPhase?.phase1?.planted === 0) {
+      plantFromHand(cardNum);
+    } else if (actionable && !selected) {
       setSelected(true);
-    } 
+    }
   }
 
   function handlePlant() {

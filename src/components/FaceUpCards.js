@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { plantCard } from '../utils/users';
 import Card from './cards/Card';
 
 const FaceUpCardsStyle = styled.div`
@@ -103,6 +104,13 @@ export default function FaceUpCards({
   myTurn,
   userData
 }) {
+
+  function quickPlant(card) {
+    if (myTurn && gameData.turnPhase.phase === 3) {
+      plantCard(card, userData, 'faceUp', gameData, gameCode);
+    }
+  }
+
   return (
     <FaceUpCardsStyle>
       <h2 className="section-title">Face Up</h2>
@@ -114,7 +122,8 @@ export default function FaceUpCards({
             <Card
               cardNum={card}
               location='faceUp'
-              actionable={myTurn && gameData.turnPhase.phase === 3}
+              // actionable={myTurn && gameData.turnPhase.phase === 3}
+              onClick={() => quickPlant(card)}
               plantType='faceUp'
               rotate='true'
               gameData={gameData}
