@@ -109,7 +109,14 @@ const TradeDisplayStyles = styled.div`
 `;
 
 
-function ConfirmedUser({ from, userData, tradeData, users }) {
+function ConfirmedUser({ 
+  from,
+  userData,
+  tradeData,
+  users,
+  errors,
+  setErrors
+}) {
 
   function handleFromConfirm() {
     acceptTrade(tradeData, 'fromAccept');
@@ -124,12 +131,18 @@ function ConfirmedUser({ from, userData, tradeData, users }) {
       acceptTrade(tradeData, 'toAccept');
       console.log('to can accept!')
     } else {
-      console.log('cannot accept')
+      setErrors([
+        ...errors,
+        {
+          type: 'warning',
+          msg: 'You do not have the cards needed to accept trade!'
+        }
+      ])
     }
   }
 
   function handleCancel() {
-    rejectTrade(tradeData, userData.name);
+    rejectTrade(tradeData.tradeId, userData.name);
   }
 
   let waitingOn = 'players';
@@ -196,6 +209,8 @@ export default function TradeDisplay({
   gameCode,
   users,
   userData,
+  errors,
+  setErrors
 }) {
 
   // const tradeData = gameData.trades.filter(t => t.tradeId === tradeId)[0];
@@ -245,7 +260,7 @@ export default function TradeDisplay({
   }, [tradeData, userData?.userId, from?.userId, users, gameData, gameCode, fulfilling])
 
   function handleCancel() {
-    rejectTrade(tradeData, userData.name);
+    rejectTrade(tradeData.tradeId, userData.name);
   }
 
   function giveTitle() {
@@ -287,6 +302,8 @@ export default function TradeDisplay({
           userData={userData}
           tradeData={tradeData}
           users={users}
+          errors={errors}
+          setErrors={setErrors}
         />
       )
     } else {
@@ -303,6 +320,8 @@ export default function TradeDisplay({
               userTrade={user}
               myTurn={myTurn}
               myAccept={userData.userId === user.userId}
+              errors={errors}
+              setErrors={setErrors}
             />
           )
         })}

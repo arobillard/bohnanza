@@ -5,8 +5,6 @@ import { deal, resetUserGameInfo } from './users';
 
 const db = firebase.firestore();
 
-const miniDeck = [8, 4, 5, 4, 2, 3, 0, 2, 3, 3, 3, 2, 2, 8, 9, 10, 10, 0, 2, 4, 8, 7, 9, 7, 1];
-
 const turnPhaseDefault = {
   phase: 1,
   phase1 : { // Hand Plant

@@ -8,6 +8,13 @@ export const Container = styled.div`
       padding-left: ${({ theme }) => theme.spacers.x1}rem;
       padding-right: ${({ theme }) => theme.spacers.x1}rem;
     `}
+  ${({ padding }) => padding && css`
+    ${padding['top'] && `padding-top: ${padding['top']};`}
+    ${padding['right'] && `padding-right: ${padding['right']};`}
+    ${padding['bottom'] && `padding-bottom: ${padding['bottom']};`}
+    ${padding['left'] && `padding-left: ${padding['left']};`}
+  `
+  }
   ${({ flex }) =>
     flex &&
     css`
@@ -39,6 +46,10 @@ export const Container = styled.div`
             }
           `;
         })}
+    `}
+    ${({ gap, theme }) => gap && css`
+      ${gap['col'] && `column-gap: ${theme.spacers[gap['col']]}rem;`}
+      ${gap['row'] && `row-gap: ${theme.spacers[gap['row']]}rem;`}
     `}
 `;
 

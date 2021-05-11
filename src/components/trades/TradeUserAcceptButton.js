@@ -20,7 +20,9 @@ export default function TradeUserAcceptButton({
   singleUser,
   userTrade,
   myTurn,
-  myAccept
+  myAccept,
+  errors,
+  setErrors
 }) {
 
   function statusIcon() {

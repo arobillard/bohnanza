@@ -238,6 +238,29 @@ export default function UsersWaiting({ gameCode, gameData, user, setUser, users 
     }
   }
 
+  function removeUser(gameUser) {
+
+    function kickUser(gameUser) {
+      if (gameUser.userId === user.id) {
+        handleRemoveUser(gameUser);
+      } else {
+        removeUserFromGame(gameCode, gameUser.userId);
+      }
+    }
+
+    if (gameUser.userId === user.id || gameData?.host === user.id) {
+      return (
+        <button
+          className="remove-user material-icons"
+          onClick={() => kickUser(gameUser)}
+        >
+          close
+        </button>
+      )
+    }
+    return null;
+  }
+
   return (
     <UserGrid>
       {users.map(gameUser => (
@@ -245,11 +268,12 @@ export default function UsersWaiting({ gameCode, gameData, user, setUser, users 
           <span className="user-color"></span>
           <p className="user-name">{gameUser.name}</p>
           {
-            gameUser.userId === user.id
-            &&
-            <button className="remove-user material-icons" onClick={() => handleRemoveUser(gameUser)}>
-              close
-            </button>
+            // gameUser.userId === user.id
+            // &&
+            // <button className="remove-user material-icons" onClick={() => handleRemoveUser(gameUser)}>
+            //   close
+            // </button>
+            removeUser(gameUser)
           }
           {
             gameData?.host === gameUser.userId

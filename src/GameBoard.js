@@ -26,6 +26,7 @@ export default function GameBoard({
   const [trades, setTrades] = useState([]);
   const [myTurn, setMyTurn] = useState(false);
   const [tradeBoardVisible, setTradeBoardVisible] = useState(false);
+  const [latestTrade, setLatestTrade] = useState(null);
 
   const { gameCode: gCode } = useParams();
 
@@ -116,6 +117,8 @@ export default function GameBoard({
           errors={errors}
           setErrors={setErrors}
           myTurn={myTurn}
+          latestTrade={latestTrade}
+          setLatestTrade={setLatestTrade}
         />
         {
           gameData?.host === user?.id

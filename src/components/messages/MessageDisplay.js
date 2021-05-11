@@ -86,6 +86,8 @@ export default function MessageDisplay({
             users={users}
             userData={userData}
             gameCode={gameCode}
+            errors={errors}
+            setErrors={setErrors}
           />
         ))}
       </div>

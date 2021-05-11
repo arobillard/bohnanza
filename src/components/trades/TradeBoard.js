@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components"
 import { setNewMessage } from "../../utils/database";
-import { setNewTrade } from "../../utils/trades";
+import { rejectTrade, setNewTrade } from "../../utils/trades";
 import Button from "../Button";
 import TradeAllCards from "./TradeAllCards";
 import TradeFaceUp from "./TradeFaceUp";
@@ -153,7 +153,9 @@ export default function TradeBoard({
   users,
   errors,
   setErrors,
-  myTurn
+  myTurn,
+  latestTrade,
+  setLatestTrade
 }) {
 
   const [minimize, setMinimize] = useState(false);
@@ -240,6 +242,10 @@ export default function TradeBoard({
       type: 'trade',
     }
 
+    if (latestTrade) {
+      rejectTrade(latestTrade, userData.name);
+    }
+    setLatestTrade(tradeId);
     setNewMessage(tradeMessage, gameCode);
     setNewTrade(tradeData, gameCode);
     setTradeBoardVisible(false);

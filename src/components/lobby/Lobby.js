@@ -5,6 +5,7 @@ import { bpScales, breakpointGenerateScales } from "../../styles/Typography";
 import { startGame } from "../../utils/database";
 import { watchUsersInGame } from "../../utils/users";
 import Button from "../Button";
+import GameOptions from "./GameOptions";
 import UserJoin from "./UserJoin";
 import UsersWaiting from "./UsersWaiting";
 
@@ -47,7 +48,16 @@ export default function Lobby({
   }
 
   return (
-    <Container grid cols={{ 'xs': 1, 'ml': 2}} vAlign="center">
+    <Container
+      grid
+      gap={{ col: 'x2', row: 'x1' }}
+      cols={{ 'xs': 1, 'ml': 2}}
+      vAlign="center"
+      padding={{
+        top: '3rem',
+        bottom: '3rem',
+      }}
+    >
       <GameInfo>
         <h2>
           <span>Game Code:</span>
@@ -56,11 +66,18 @@ export default function Lobby({
         {
           gameData?.host === user?.id
           &&
-          <Button onClick={handleStart}>Start Game</Button>
+          <>
+            <GameOptions
+              gameData={gameData}
+            />
+            <Button onClick={handleStart}>Start Game</Button>
+          </>
         }
       </GameInfo>
       {
         user?.gameCode === gameCode
+        &&
+        gameData?.users.includes(user.id)
         ?
         <UsersWaiting
           gameCode={gameCode}

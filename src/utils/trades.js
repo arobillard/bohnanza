@@ -100,10 +100,10 @@ export async function acceptTrade(tradeData, trader) {
   }
 }
 
-export async function rejectTrade(tradeData, rejector) {
+export async function rejectTrade(tradeId, rejector) {
   try {
     await Promise.all([
-      db.collection('trades').doc(tradeData.tradeId).update({
+      db.collection('trades').doc(tradeId).update({
         rejected: true,
         rejector
       })
