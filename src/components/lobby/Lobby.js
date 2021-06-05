@@ -67,9 +67,9 @@ export default function Lobby({
           gameData?.host === user?.id
           &&
           <>
-            <GameOptions
+            {/* <GameOptions
               gameData={gameData}
-            />
+            /> */}
             <Button onClick={handleStart}>Start Game</Button>
           </>
         }

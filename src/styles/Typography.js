@@ -135,6 +135,14 @@ const Typography = createGlobalStyle`
   h6 {
     font-size: 1rem;
   }
+
+  a {
+    transition:
+      box-shadow ${({ theme }) => theme.transition},
+      border-color ${({ theme }) => theme.transition},
+      background-color ${({ theme }) => theme.transition},
+      color ${({ theme }) => theme.transition};
+  }
 `;
 
 export default Typography;

@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 import { cardList } from '../../data/cards';
 import { arrayObjectSort } from '../../utils/helpers'
 import { applyUserColor } from '../../styles/Theme';
-import CardMini from '../cards/CardMini';
 import TradeUserAcceptButton from './TradeUserAcceptButton';
 import Button from '../Button';
 import { acceptTrade, checkTrade, fulfillTrade, rejectTrade } from '../../utils/trades';
+import Card from '../cards/Card';
 
 const TradeDisplayStyles = styled.div`
   grid-column: span 12;
@@ -40,6 +40,16 @@ const TradeDisplayStyles = styled.div`
   h4 {
     ${({ theme }) => theme.fontSizes.scale5}
     margin: 0;
+    /* display: flex;
+    align-items: center; */
+    .material-icons {
+      background-color: #fff;
+      border-radius: 50%;
+      ${({ color }) => applyUserColor(color, 'color')}
+      font-size: 1rem;
+      padding: .125rem;
+      margin-right: .25rem;
+    }
   }
   .trade-grid {
     display: grid;
@@ -266,34 +276,69 @@ export default function TradeDisplay({
   function giveTitle() {
     if (tradeData?.confirmedTo) {
       const userGive = users.filter(u => u.userId === tradeData?.confirmedTo)[0];
-      return `${userGive.name} gets`;
+      return (
+        <>
+          {tradeData?.toAccept ? <i className="material-icons">check</i> : '' }
+          {userGive.name} gets
+        </>
+      )
     } else if (userData.userId === from?.userId) {
-      return 'You offer';
+      return (
+        <>
+          {tradeData?.toAccept ? <i className="material-icons">check</i> : '' }
+          You offer
+        </>
+      )
     } else {
-      return `${from?.name} offers`;
+      return (
+        <>
+          {tradeData?.toAccept ? <i className="material-icons">check</i> : '' }
+          {from?.name} offers
+        </>
+      )
     }
   }
 
   function getTitle() {
     if (tradeData?.confirmedTo && userData.userId === from?.userId) {
-      return 'You get';
+      return (
+        <>
+          {tradeData?.fromAccept ? <i className="material-icons">check</i> : '' }
+          You get
+        </>
+      )
     } else if (userData.userId === from?.userId) {
-      return 'You want';
+      return (
+        <>
+          {tradeData?.fromAccept ? <i className="material-icons">check</i> : '' }
+          You want
+        </>
+      )
     } else if (tradeData?.confirmedTo && userData.userId !== from?.userId) {
-      return `${from?.name} gets`;
+      return (
+        <>
+          {tradeData?.fromAccept ? <i className="material-icons">check</i> : '' }
+          {from?.name} gets
+        </>
+      )
     } else {
-      return `${from?.name} wants`;
+      return (
+        <>
+          {tradeData?.fromAccept ? <i className="material-icons">check</i> : '' }
+          {from?.name} wants
+        </>
+      )
     }
   }
 
   function userHandling() {
-    if (tradeData?.rejected) {
-      return (
-        <p className="reject-message">Trade was cancelled by {tradeData?.rejector}.</p>
-      )
-    } else if (tradeData?.toAccept && tradeData.fromAccept) {
+    if (tradeData?.toAccept && tradeData.fromAccept) {
       return (
         <p className="accept-message">Trade accepted</p>
+      )
+    } else if (tradeData?.rejected) {
+      return (
+        <p className="reject-message">Trade was cancelled by {tradeData?.rejector}.</p>
       )
     } else if (tradeData?.confirmedTo) {
       return (
@@ -364,11 +409,10 @@ export default function TradeDisplay({
                 className="card-type-wrap"
                 key={`${tradeId}-give-${i}`}
               >
-                <CardMini
+                <Card
                   cardNum={cardNum}
-                  width={{ 'xs': 2 }}
-                  borderColor={from?.bohnanza.color}
-                  users={users}
+                  location="trade"
+                  actionable={false}
                 />
                 <p>{count}x <span>{name}</span></p>
               </div>
@@ -390,10 +434,10 @@ export default function TradeDisplay({
                   key={`${tradeId}-give-${i}`}
                 >
                   <p>{count}x <span>{name}</span></p>
-                  <CardMini
+                  <Card
                     cardNum={cardNum}
-                    width={{ 'xs': 2 }}
-                    borderColor={from?.bohnanza.color}
+                    location="trade"
+                    actionable={false}
                   />
                 </div>
               )

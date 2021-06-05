@@ -123,7 +123,7 @@ export default function Deck({
       if (gameData.deck.length > 0) {
         progressPhase(gameCode, gameData, 'p4Draw');
         drawCard(userData, gameData, gameCode);
-        if (gameData.turnPhase.phase4.drawn === 2) {
+        if (gameData.turnPhase.phase4.drawn === 3) {
           nextPhase(gameData, gameCode, setErrors, errors);
         }
       } else {
@@ -135,6 +135,7 @@ export default function Deck({
           }
         ]
         setErrors(updatedErrors);
+        await reshuffleDeck(gameCode, gameData.deck, gameData.discardPile);
       }
     } else if (myTurn && gameData.turnPhase.phase === 2 && !gameData.turnPhase.phase2.turned) {
       if (gameData.deck.length > 1) {
@@ -150,8 +151,6 @@ export default function Deck({
         ]
         setErrors(updatedErrors);
         await reshuffleDeck(gameCode, gameData.deck, gameData.discardPile);
-        turnUpCards(gameCode, gameData);
-        progressPhase(gameCode, gameData, 'turnUp');
       }
     }
   }

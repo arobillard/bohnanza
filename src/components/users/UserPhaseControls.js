@@ -94,22 +94,11 @@ export default function UserPhaseControls({
 
     if (gameData.turnPhase.phase === 3) {
 
-      // let theresAPot = false;
-      // for (let i = 0; i < users.length; i++) {
-      //   const user = users[i];
-      //   if (user.bohnanza.pot.length) {
-      //     theresAPot = true;
-      //     break;
-      //   }
-      // }
-
       users.forEach(user => {
         if (user.bohnanza.pot.length) {
           usersWithPot.push(user.name);
         }
       })
-
-      console.log(usersWithPot);
 
       if (usersWithPot.length) {
         customErr = `Players who still need to plant: ${usersWithPot.join(', ')}`;
@@ -144,7 +133,15 @@ export default function UserPhaseControls({
       <SmallText>
         {turnPhase[`phase${turnPhase.phase}`].desc}
       </SmallText>
-      {myTurn && <Button color="secondary" fullWidth onClick={handleNextPhase}>Next Phase</Button>}
+      {myTurn &&
+        <Button
+          color={userData.bohnanza.color === 'yellow' ? 'primary' : 'secondary' }
+          fullWidth
+          onClick={handleNextPhase}
+        >
+          Next Phase
+        </Button>
+      }
       {showWarning
         &&
         <TradeWarning

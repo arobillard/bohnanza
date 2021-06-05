@@ -303,12 +303,19 @@ const CardStyles = styled.div`
       }
     }
   `}
-  /* ${({ location, textColor, cardName }) => location === 'tradeBoard' && css`
-    .card-image-wrap {
-      height: calc(100% - 2rem);
-      padding-top: 0;
+  ${({ location }) => location === 'trade' && css`
+    width: 2rem;
+    .card-design {
+      border-radius: .5rem;
     }
-  `} */
+    .card-image-wrap {
+      top: .125rem;
+      left: .125rem;
+      width: calc(100% - .25rem);
+      /* padding-top: calc(100% - .5rem); */
+      padding-top: 100%;
+    }
+  `}
 `;
 
 const CardOptions = styled.div`

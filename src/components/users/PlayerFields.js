@@ -25,6 +25,22 @@ const PlayerFieldsStyles = styled.div`
       `
     }
   }}
+  /* ${({ theme, upNext, color }) => {
+    if (upNext) {
+      if (color === 'yellow') {
+        return css`
+          border: ${({ theme }) => theme.spacers.sixth}rem dotted ${theme.colors.secondary};
+        `
+      } else if (color === 'red') {
+        return css`
+          border: ${({ theme }) => theme.spacers.sixth}rem dotted ${theme.colors.primary};
+        `
+      }
+      return css`
+        border: ${({ theme }) => theme.spacers.sixth}rem dotted ${theme.colors[color]};
+      `
+    }
+  }} */
 `;
 
 const TitleWrap = styled.div`
@@ -34,8 +50,17 @@ const TitleWrap = styled.div`
 `;
 
 export default function PlayerFields({ user, gameData }) {
+
+  const { users, turn } = gameData;
+  const currentIndex = users.indexOf(turn);
+  const upNext = users[currentIndex + 1];
+
   return (
-    <PlayerFieldsStyles myTurn={gameData.turn === user.userId} color={user.bohnanza.color}>
+    <PlayerFieldsStyles
+      myTurn={turn === user.userId}
+      upNext={upNext === user.userId}
+      color={user.bohnanza.color}
+    >
       <TitleWrap>
         <UserTitle>{user.name}</UserTitle>
         <strong>Coins: {user?.bohnanza.score?.length || 0}</strong>

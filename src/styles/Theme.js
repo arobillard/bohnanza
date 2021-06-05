@@ -42,6 +42,7 @@ const theme = {
     third: spacerBase / 3,
     half: spacerBase / 2,
     twoThirds: (spacerBase / 3) * 2,
+    threeQuarters: spacerBase * .75,
     x1: spacerBase,
     x2: spacerBase * 2,
     x3: spacerBase * 3,

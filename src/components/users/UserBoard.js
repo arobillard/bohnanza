@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { harvest } from "../../utils/users";
 import UserFields from "./UserFields";
 import UserHand from "./UserHand";
@@ -36,6 +36,9 @@ const UserBoardStyle = styled.div`
       'userHand userHand userHand'
       'userPot userPot userPhase';
   }
+  ${({ upNext }) => upNext && css`
+    border-style: dotted;
+  `}
 `;
 
 export default function UserBoard({
@@ -52,8 +55,22 @@ export default function UserBoard({
     harvest(userData, cardNum, numCards, fieldNum, gameCode, gameData)
   }
 
+  const { users: gameUsers, turn } = gameData;
+  const currentIndex = gameUsers.indexOf(turn);
+  const upNext = gameUsers[currentIndex + 1] || gameUsers[0];
+
+  let borderColor = 'secondaryPale';
+
+  if (myTurn || upNext === userData.userId) {
+    borderColor = userData.bohnanza.color;
+  }
+
   return (
-    <UserBoardStyle borderColor={myTurn ? userData.bohnanza.color : 'secondaryPale'}>
+    <UserBoardStyle
+      borderColor={borderColor}
+      upNext={upNext === userData.userId}
+      // borderColor={myTurn ? userData.bohnanza.color : 'secondaryPale'}
+    >
       {
         userData ? (
           <>

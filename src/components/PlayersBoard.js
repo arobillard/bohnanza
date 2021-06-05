@@ -38,7 +38,7 @@ export default function PlayersBoard({
   return (
     <PlayersBoardStyle>
       <PBScroll>
-        {users.map((user) => user.userId !== userData.userId
+        {/* {users.map((user) => user.userId !== userData.userId
           ?
           <PlayerFields
             key={`player-field-${user.userId}`}
@@ -47,7 +47,20 @@ export default function PlayersBoard({
           />
           :
           null
-        )}
+        )} */}
+        {gameData.users.map((user) => {
+          const newUser = users.filter(u => u.userId === user)[0];
+          if (user !== userData.userId) {
+            return (
+              <PlayerFields
+                key={`player-field-${user}`}
+                user={newUser}
+                gameData={gameData}
+              />
+            )
+          }
+          return null;
+        })}
       </PBScroll>
     </PlayersBoardStyle>
   );

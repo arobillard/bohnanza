@@ -24,7 +24,7 @@ const turnPhaseDefault = {
   },
   phase4: { // Draw
     title: 'Draw',
-    desc: 'Draw two cards, placing in hand in order.',
+    desc: 'Draw three cards, placing in hand in order.',
     drawn: 0,
   }
 }
@@ -60,7 +60,7 @@ export function startGame(gameCode, users) {
   db.collection('bohnanza').doc(gameCode).update({
     gameStart: true,
     deck,
-    discardPile: [],
+    discardPile: [9, 5, 10, 6, 3, 7],
     messages: [],
     faceUp: [],
     turn: firstUser,
@@ -72,6 +72,7 @@ export function startGame(gameCode, users) {
 }
 
 export async function reshuffleDeck(gameCode, deck, discardPile) {
+  console.log('reshuffle function');
   const updatedDeck = shuffle([
     ...deck,
     ...discardPile
